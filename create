@@ -1,0 +1,43 @@
+import random 
+import os, time
+
+print("\033[32mCHARACTER BUILDER\033[0m")
+print()
+
+createCharacter = "yes"
+while createCharacter == "yes":
+  
+  name = input("Name Your Mythical Creature:")
+  print()
+  time.sleep(1)
+  type = input("What is your mythical creatures physical form?:")
+  time.sleep(1)
+  print()
+  
+  def health():
+    sidesSixSided = random.randint(1,6)
+    sidesTwelveSided = random.randint(1,12)
+    healthDice = ((sidesSixSided * sidesTwelveSided) / 2) + 10
+    return healthDice
+  
+  def strength():
+    sixSides = random.randint(1,6)
+    twelveSides = random.randint(1,12)
+    strengthDice = ((sixSides * twelveSides) / 2) + 12
+    return strengthDice
+
+  myDice = health()
+  print(name, "the", type)
+  print("\033[31mHEALTH:\033[0m", myDice)
+   
+
+  myDiceCombined = strength()
+  print()
+  print("\033[31mSTRENGTH:\033[0m", myDiceCombined)
+  print()
+
+
+
+  createCharacter = input("\033[32mDo you want to create another character?:\033[0m")
+
+os.system("clear")
