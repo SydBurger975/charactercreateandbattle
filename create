@@ -1,43 +1,117 @@
-import random 
-import os, time
+import random, os, time
+
+
+def rollDice(sides):
+  result = random.randint(1,sides)
+  return result
+
+def health():
+  healthStat = ((rollDice(6)*rollDice(12))/2)+10
+  return healthStat
+
+def strength():
+  strengthStat = ((rollDice(6)*rollDice(12))/2)+12
+  return strengthStat
+  
+
 
 print("\033[32mCHARACTER BUILDER\033[0m")
 print()
-
-createCharacter = "yes"
-while createCharacter == "yes":
-  
-  name = input("Name Your Mythical Creature:")
-  print()
-  time.sleep(1)
-  type = input("What is your mythical creatures physical form?:")
-  time.sleep(1)
-  print()
-  
-  def health():
-    sidesSixSided = random.randint(1,6)
-    sidesTwelveSided = random.randint(1,12)
-    healthDice = ((sidesSixSided * sidesTwelveSided) / 2) + 10
-    return healthDice
-  
-  def strength():
-    sixSides = random.randint(1,6)
-    twelveSides = random.randint(1,12)
-    strengthDice = ((sixSides * twelveSides) / 2) + 12
-    return strengthDice
-
-  myDice = health()
-  print(name, "the", type)
-  print("\033[31mHEALTH:\033[0m", myDice)
-   
-
-  myDiceCombined = strength()
-  print()
-  print("\033[31mSTRENGTH:\033[0m", myDiceCombined)
-  print()
+name = input("Name Your Mythical Creature:\n")
+print()
+time.sleep(1)
+type = input("What is your mythical creatures physical form?:\n")
+time.sleep(1)
+print()
+print(name, "the", type)
+p1health = health()
+p1strength = strength()
+print("\033[31mHEALTH:\033[0m", p1health)
+print()
+print("\033[031mSTRENGTH:\033[0m", p1strength)
+print()
+print("Let's find out who you are battling!!")
+print()
+time.sleep(1)
 
 
-
-  createCharacter = input("\033[32mDo you want to create another character?:\033[0m")
-
+name2 = input("Name Your Mythical Creature:\n")
+print()
+type2 = input("What is your mythical creatures physical form?:\n")
+time.sleep(1)
+print(name2, "the", type2)
+p2health = health()
+p2strength = strength()
+print("\033[31mHEALTH:\033[0m", p2health)
+print()
+print("\033[031mSTRENGTH:\033[0m", p2strength)
+print("Now its time to battle!!! Who will win?")
+time.sleep(5)
 os.system("clear")
+
+counter = 0
+winner = None
+while True:
+  time.sleep(1)
+  os.system("clear")
+  print("\033[32mBATTLE TIME\033[0m")
+  print()
+  print("\033[32mThe battle begins!\033[0m")
+  print()
+
+  damage = abs(p1strength - p2strength + 1)
+  
+  counter += 1
+  print("Round", counter)
+  print()
+  
+  p1roll = rollDice(6)
+  p2roll = rollDice(6)
+  if p1roll > p2roll:
+    p2health -= damage
+    print(name, "the", type, "wins the first blow")
+    print(name2,"the", type2, "takes a hit, with", damage, "damage")
+    print()
+    print(name,"the", type)
+    print("\033[31mHEALTH:\033[0m", p1health)
+    print()
+    print(name2,"the", type2)
+    print("\033[31mHEALTH:\033[0m", p2health)
+    print()
+    if p2health <= 0:
+      print("Oh no", name2,"the", type2, "has died!")
+      print()
+      print(name,"the", type, "destroyed", name2,"the", type2, "in", counter, "round(s)!")
+      break
+      
+    elif p2health > 0:
+      print()
+      print("\033[32mAnd they're both standing for the next round!\033[0m")
+      print()
+      time.sleep(10)
+      os.system("clear")
+      continue
+  elif p2roll > p1roll:
+    p1health -= damage
+    print(name2,"the", type2, "\033[032mwins the first blow\033[0m")
+    print(name,"the", type, "\033[31mtakes a hit, with\033[0m", damage, "\033[31mdamage\033[0m")
+    print()
+    print(name,"the", type,)
+    print("\033[31mHEALTH:\033[0m",p1health)
+    print(name2,"the", type2,)
+    print("\033[31mHEALTH:\033[0m", p2health)
+    print() 
+    if p1health <= 0:
+      print("Oh no", name, "the", type, "has died!")
+      print()
+      print(name2,"the", type2, "destroyed", name,"the", type, "in", counter, "round(s)!")
+      break
+
+    elif p1health > 0:
+      print()
+      print("\033[32mAnd they're both standing for the next round!\033[0m")
+      print()
+      time.sleep(10)
+      os.system("clear")
+      continue
+      
